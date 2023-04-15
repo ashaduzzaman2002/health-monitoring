@@ -1,0 +1,63 @@
+
+.navbar-custom {
+    height: 5rem;
+    transition: 0.8s all;
+  }
+  
+  .navbar-brand {
+    font-size: 2.8rem;
+    letter-spacing: 5px;
+    font-weight: 700;
+    font-family: 'Passions Conflict', cursive;
+    color: #fff;
+    text-shadow: 1px 1px 1px #00000055;
+    transition: 0.8s all;
+  }
+
+  .navbar-brand:visited {
+    color: #fff !important;
+  }
+  
+  .nav-link {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    color: #fff !important;
+    transition: 0.8s all;
+  }
+  
+ .nav-link:hover{
+  color: #01ca8b !important;
+ }
+
+
+  
+  .scroll-nav {
+    background-color: white !important;
+    transition: 0.8s all;
+    box-shadow: 0px 10px 8px -10px #11111197;
+  }
+  
+.menu-btn {
+  color: #fff !important;
+}
+
+  .scroll-brad {
+    color: #01ca8b !important;
+    transition: 0.8s all;
+  }
+
+  .scroll-brad:visited {
+    color: #01ca8b !important;
+  }
+  
+  
+  .scroll-link{
+    color: rgb(28, 28, 28) !important;
+    transition: 0.8s all;
+  }
+
+  .active-link{
+    color: #01ca8b !important;
+   }
+  

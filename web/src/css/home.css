@@ -1,0 +1,27 @@
+.carouselImg::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(21, 20, 51, 0.6);
+}
+
+.carouselImg {
+    width: 100%;
+    height: 100%;
+    position: fixed !important;
+    top: 0;
+    z-index: -1;
+}
+
+.carousel-caption {
+  top: 60% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.home-container {
+    background-color: white;
+}
