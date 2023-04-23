@@ -89,7 +89,6 @@ const Signup = ({navigation}) => {
         <Text style={styles.btn}>Sign Up</Text>
       </TouchableOpacity>
 
-      <Text style={styles.forgot}>Forgot Password</Text>
 
       <View style={hr80} />
 

@@ -1,11 +1,15 @@
-const User = require('../models/User');
+const router = require("express").Router();
+const { validateUser, validate, loginValidator } = require("../middlewares/validator");
 
-const Router = require('express').Router;
-const router = Router();
+// Require Controllers
+const { createUser, loginUser, verifyEmail, forgotPassword } = require('../controllers/userControlers');
 
-router.post('/register', async (req, res) => {
-    const user = new User({name: "Ashadu", email: "as@g.com", password: "wejrwejr"})
-    await user.save()
-})
+
+// Routes
+router.post("/create", validateUser, validate, createUser);
+router.post("/signin", loginValidator, validate, loginUser);
+router.post("/verify-email", verifyEmail);
+router.post("/forgot-password", forgotPassword);
+
 
 module.exports = router
