@@ -13,7 +13,6 @@
 
 An awesome Health monitoring project!
 
-<br  />
 
 <a  href="https://github.com/ashaduzzaman2002/health-monitoring"><strong>Demo »</strong></a>
 
@@ -68,9 +67,8 @@ An awesome Health monitoring project!
 
 <li><a  href="#roadmap">Roadmap</a></li>
 
-<li><a  href="#contributing">Contributing</a></li>
+<li><a  href="#contributor">Contributor</a></li>
 
-<li><a  href="#license">License</a></li>
 
 <li><a  href="#contact">Contact</a></li>
 
@@ -87,11 +85,6 @@ An awesome Health monitoring project!
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
-
-  
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
   
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
@@ -130,21 +123,9 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
   
 
-* [![Next][Next.js]][Next-url]
+* Node.js
 
-* [![React][React.js]][React-url]
-
-* [![Vue][Vue.js]][Vue-url]
-
-* [![Angular][Angular.io]][Angular-url]
-
-* [![Svelte][Svelte.dev]][Svelte-url]
-
-* [![Laravel][Laravel.com]][Laravel-url]
-
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-
-* [![JQuery][JQuery.com]][JQuery-url]
+* React Native
 
   
 
@@ -250,19 +231,19 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
   
 
-- [x] Add Changelog
+- [x] Login API
 
-- [x] Add back to top links
+- [x] Signup API
 
-- [ ] Add Additional Templates w/ Examples
+- [x]  OTP verification API
 
-- [ ] Add "components" document to easily copy & paste sections of the readme
+- [x] Reset password API
 
-- [ ] Multi-language Support
+- [x] Login UI
 
-- [ ] Chinese
+- [x] Signup UI
 
-- [ ] Spanish
+- [ ] Home
 
   
 
@@ -278,29 +259,12 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 <!-- CONTRIBUTING -->
 
-## Contributing
+## Contributor
 
-  
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+1. <a href='https://github.com/ashaduzzaman2002'>Ashaduzzaman Mondal</a>
 
-  
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-
-Don't forget to give the project a star! Thanks again!
-
-  
-
-1. Fork the Project
-
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-
-5. Open a Pull Request
+2. <a href="https://github.com/Urahul04">Rahul Upadhyay</a>
 
   
 
@@ -310,15 +274,7 @@ Don't forget to give the project a star! Thanks again!
   
   
 
-<!-- LICENSE -->
 
-## License
-
-  
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-  
 
 <p  align="right">(<a  href="#readme-top">back to top</a>)</p>
 
