@@ -4,14 +4,16 @@ const app = express();
 require('dotenv').config()
 const port = 8000 || process.env.PORT
 
-const userRouter = require('./routers/userRoutes')
+const patientRouter = require('./routers/patientRoute')
 
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send('Hello')
 })
 
-app.use('/user', userRouter)
+app.use('/api/patient', patientRouter)
 
 
 // connected to the db

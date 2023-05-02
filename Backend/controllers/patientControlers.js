@@ -1,27 +1,26 @@
 // Models
-const User = require("../models/User");
 const VerifcationToken = require("../models/VerificationToken");
 
 const bcrypt = require("bcrypt");
-const { sendError } = require("../utils/helper");
 const jwt = require("jsonwebtoken");
-const { generateOTP, mailTransport, mailTemplete, welcomeMail } = require("../utils/mail");
-const { isValidObjectId } = require("mongoose");
-const { findById } = require("../models/User");
-const ResetPassToken = require("../models/ResetPassToken");
+const Patient = require("../models/Patient");
+// const { generateOTP, mailTransport, mailTemplete, welcomeMail } = require("../utils/mail");
+// const { isValidObjectId } = require("mongoose");
+// const { findById } = require("../models/User");
+// const ResetPassToken = require("../models/ResetPassToken");
 
 // Create user
-exports.createUser = async (req, res) => {
+exports.signupPaitent = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    const user = await User.findOne({ email: email });
+    const patient = await Patient.findOne({ email: email });
 
-    if (!user) {
+    if (!patient) {
       // Hashing the password
       const hashpassword = await bcrypt.hash(password, 8);
 
-      const newUser = new User({
+      const newPatient = new Patient({
         name,
         email,
         password: hashpassword,
@@ -37,7 +36,7 @@ exports.createUser = async (req, res) => {
       });
 
       await verifcationToken.save();
-      await newUser.save();
+      await newPatient.save();
 
       mailTransport().sendMail({
         from: "crezytechy@gmail.com",
@@ -49,18 +48,18 @@ exports.createUser = async (req, res) => {
       res.status(200).json({ success: true, msg: "Register Successfully" });
     }
 
-    sendError(res, 403, "User Already exist");
+    res.status(403).json({msg: "User Already exist"})
   } catch (error) {
     console.log(error);
   }
 };
 
 // Login user
-exports.loginUser = async (req, res) => {
+exports.signinPatient = async (req, res) => {
   const { email, password } = req.body;
 
-  let user = await User.findOne({ email: email });
-  if (user) {
+  let patient = await Patient.findOne({ email });
+  if (patient) {
     const userPassword = user.password;
     const isMatched = await bcrypt.compare(password, userPassword);
 
@@ -68,14 +67,13 @@ exports.loginUser = async (req, res) => {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRECT, {
         expiresIn: "7d",
       });
-      user = {
-        name: user.name,
-        email: user.email,
-        avtar: user.avtar,
+      patient = {
+        name: patient.name,
+        email: patient.email,
         id: user._id,
         token,
       };
-      res.status(200).json({ success: true, user });
+      res.status(200).json({ success: true, patient });
     } else {
       sendError(res, "Invalid Credentials");
     }
@@ -85,7 +83,7 @@ exports.loginUser = async (req, res) => {
 };
 
 
-// Verify email
+// // Verify email
 exports.verifyEmail = async (req, res) => {
   const { userId, otp } = req.body;
   if (!userId || !otp.trim())
