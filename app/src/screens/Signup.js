@@ -21,6 +21,7 @@ import { hr80 } from '../global/styles';
 import Toast from 'react-native-toast-message';
 
 import axios from 'axios';
+import { loaclURL } from '../../connection/config';
 
 const Signup = ({ navigation }) => {
   // onfocus events
@@ -82,7 +83,7 @@ const Signup = ({ navigation }) => {
 
     try {
       const { data } = await axios.post(
-        'http://192.168.229.6:8000/api/patient/create',
+        `${loaclURL}api/patient/create`,
         user
       );
 

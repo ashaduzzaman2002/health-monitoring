@@ -2,6 +2,7 @@ import { BackHandler, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View
 import React, { useContext, useEffect } from 'react';
 import { colors, hr80 } from '../global/styles';
 import { AuthContext } from '../context/AppContext';
+import Spinner from '../components/Spinner';
 
 const Welcome = ({ navigation }) => {
   const {isLoading} = useContext(AuthContext)
@@ -19,8 +20,9 @@ const Welcome = ({ navigation }) => {
   }, []);
 
   if(isLoading) {
-    return <Text>Loading...</Text>
+    return <Spinner />
   }
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to MediDoc</Text>

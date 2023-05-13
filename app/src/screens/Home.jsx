@@ -12,15 +12,122 @@ import Header from '../components/Header';
 import { LinearGradient } from 'expo-linear-gradient';
 import CommonBtn from '../components/CommonBtn';
 import { AuthContext } from '../context/AppContext';
+import Spinner from '../components/Spinner'
+import Footer from '../components/Footer';
 
 const Home = ({ navigation }) => {
-  const {logout} = useContext(AuthContext)
+  const {logout, isLoading, userDetails} = useContext(AuthContext)
+  if(isLoading) {
+    return <Spinner />
+  }
+  
   return (
     <View style={styles.container}>
-      <Header title={'MediDoc'} icon={require('../images/logo.png')} />
+      <Header userDetails={userDetails} title={'MediDoc'} icon={require('../images/logo.png')} />
+      <Text>{userDetails?.name}</Text>
+      <ScrollView>
       <TouchableOpacity onPress={logout}>
-        <Text>Logout</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000</Text>
+        <Text>Logout0000000000000000kkkk</Text>
+      </TouchableOpacity>
+      </ScrollView>
+      
+      <Footer navigation={navigation} />
     </View>
   );
 };
@@ -30,6 +137,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    zIndex: 1
   },
   banner: {
     width: '100%',

@@ -16,6 +16,7 @@ import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import { useFocusEffect } from '@react-navigation/native';
 import { BackHandler } from 'react-native';
+import { loaclURL } from '../../connection/config';
 
 const inputs = Array(4).fill('');
 
@@ -84,7 +85,7 @@ const Otp = ({ route, navigation }) => {
 
       try {
         const { data } = await axios.post(
-          'http://192.168.229.6:8000/api/patient/verify-email',
+          `${loaclURL}api/patient/verify-email`,
           { userId: id, otp: val }
         );
 

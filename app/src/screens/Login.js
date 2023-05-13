@@ -22,6 +22,7 @@ import { hr80 } from '../global/styles';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import { AuthContext } from '../context/AppContext';
+import { loaclURL } from '../../connection/config';
 
 const Login = ({ navigation }) => {
   const [emailFocus, setEmailFocus] = useState(false);
@@ -62,13 +63,13 @@ const Login = ({ navigation }) => {
 
     setEmail(email.toLowerCase());
 
-    // if (!email?.trim().length) return setError('Email required!');
-    // if (!email.match(validEmail)) return setError('Invalid email!');
+    if (!email?.trim().length) return setError('Email required!');
+    if (!email.match(validEmail)) return setError('Invalid email!');
 
-    // if (email?.trim().split('.')[-1]?.length < 2)
-    //   return setError('Invalid email!');
+    if (email?.trim().split('.')[1]?.length < 2)
+      return setError('Invalid email!');
 
-    // if (!password.trim().length) return setError('Password required!');
+    if (!password.trim().length) return setError('Password required!');
 
     let user = {
       email: email.toLowerCase(),
@@ -78,7 +79,7 @@ const Login = ({ navigation }) => {
     // login(email, password)
 
     try {
-      const {data} = await axios.post('http://192.168.229.6:8000/api/patient/signin', user)
+      const {data} = await axios.post(`${loaclURL}api/patient/signin`, user)
       console.log(data.patient.token);
        setEmail('');
     setPassword('');
@@ -172,7 +173,7 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
 
       {/* Forgot password */}
-      <Text style={styles.forgot}>Forgot Password</Text>
+      <Text onPress={() => navigation.navigate('ForgotPass')} style={styles.forgot}>Forgot Password</Text>
 
       <View style={hr80} />
 

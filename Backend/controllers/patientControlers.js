@@ -202,3 +202,14 @@ exports.resetPassword = async (req, res) => {
   res.json({ success: true });
   await ResetPassToken.findOneAndDelete({ owner: user._id });
 };
+
+
+// Get user
+exports.getUser = async (req, res) => {
+  const userId = req.userId
+  let user = await Patient.findById(userId)
+
+  if(!user) return res.status(404).json({msg: 'User not found'})
+
+  res.json({success: true, user: {email: user.email, name: user.name, avtar: user.avtar, age: user.age}})
+}
