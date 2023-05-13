@@ -1,8 +1,26 @@
-import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
+import { BackHandler, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useContext, useEffect } from 'react';
 import { colors, hr80 } from '../global/styles';
+import { AuthContext } from '../context/AppContext';
 
 const Welcome = ({ navigation }) => {
+  const {isLoading} = useContext(AuthContext)
+
+  const handleBackButton = () => {
+    BackHandler.exitApp(); // Exit the app
+    return true; // Prevent default back button behavior
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButton);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
+    };
+  }, []);
+
+  if(isLoading) {
+    return <Text>Loading...</Text>
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to MediDoc</Text>

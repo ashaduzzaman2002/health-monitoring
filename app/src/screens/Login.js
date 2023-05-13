@@ -1,4 +1,6 @@
 import {
+  BackHandler,
+  Keyboard,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -7,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { colors } from '../global/styles';
 
 import {
@@ -17,15 +19,107 @@ import {
 } from '@expo/vector-icons';
 import { hr80 } from '../global/styles';
 
+import Toast from 'react-native-toast-message';
+import axios from 'axios';
+import { AuthContext } from '../context/AppContext';
+
 const Login = ({ navigation }) => {
   const [emailFocus, setEmailFocus] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const {login} = useContext(AuthContext)
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      // Navigate to the home page
+      navigation.navigate('Welcome');
+      return true; // Prevent default back behavior
+    });
+
+    return () => backHandler.remove();
+  }, [navigation])
+  
+
+  // Show toast message
+  const showToast = (type, text1, text2) => {
+    Toast.show({
+      type,
+      text1,
+      text2,
+      autoHide: true,
+    });
+  };
+
+  const loginHandler = async () => {
+    setError('');
+    var validEmail =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    setEmail(email.toLowerCase());
+
+    // if (!email?.trim().length) return setError('Email required!');
+    // if (!email.match(validEmail)) return setError('Invalid email!');
+
+    // if (email?.trim().split('.')[-1]?.length < 2)
+    //   return setError('Invalid email!');
+
+    // if (!password.trim().length) return setError('Password required!');
+
+    let user = {
+      email: email.toLowerCase(),
+      password,
+    };
+
+    // login(email, password)
+
+    try {
+      const {data} = await axios.post('http://192.168.229.6:8000/api/patient/signin', user)
+      console.log(data.patient.token);
+       setEmail('');
+    setPassword('');
+    
+      showToast('success', 'Logged-in successfully', 'Welcome back to MediDoc');
+
+      setTimeout(() => {
+        login(data.patient.token)
+        navigation.navigate('Home')
+      }, 3000)
+    } catch (error) {
+      if (error?.response?.data) {
+        const { data } = error.response;
+        if (!data.success) {
+          showToast('error', 'Unauthorized', data.error);
+        }
+      }
+      console.log(error);
+    }
+   
+   
+    Keyboard.dismiss();
+    
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.head1}>Sign In</Text>
 
+      {/* Show error */}
+      {error?.length ? (
+        <Text
+          style={{ color: 'red', marginBottom: 5, fontSize: 14, marginTop: -5 }}
+        >
+          {error}
+        </Text>
+      ) : (
+        ''
+      )}
+
+      {/* Email input */}
       <View style={styles.inputout}>
         <AntDesign
           name="user"
@@ -40,9 +134,12 @@ const Login = ({ navigation }) => {
             setPasswordFocus(false);
             setShowPassword(false);
           }}
+          value={email}
+          onChange={(e) => setEmail(e.nativeEvent.text)}
         />
       </View>
 
+      {/* Password input */}
       <View style={styles.inputout}>
         <MaterialCommunityIcons
           name="lock-outline"
@@ -57,6 +154,8 @@ const Login = ({ navigation }) => {
             setPasswordFocus(true);
           }}
           secureTextEntry={!showPassword}
+          value={password}
+          onChange={(e) => setPassword(e.nativeEvent.text)}
         />
 
         <Octicons
@@ -67,14 +166,17 @@ const Login = ({ navigation }) => {
         />
       </View>
 
-      <TouchableOpacity style={styles.btnout}>
+      {/* Sigin button */}
+      <TouchableOpacity onPress={loginHandler} style={styles.btnout}>
         <Text style={styles.btn}>Sign In</Text>
       </TouchableOpacity>
 
+      {/* Forgot password */}
       <Text style={styles.forgot}>Forgot Password</Text>
 
       <View style={hr80} />
 
+      {/* Signup button */}
       <Text style={styles.signupout}>
         Don't have an account?
         <Text
@@ -86,11 +188,13 @@ const Login = ({ navigation }) => {
         </Text>
       </Text>
 
+      {/* Status bar */}
       <StatusBar
         barStyle="dark-content"
         hidden={false}
         backgroundColor="#fff"
       />
+      <Toast />
     </SafeAreaView>
   );
 };

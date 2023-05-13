@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, StatusBar } from 'react-native';
 import React from 'react';
 
 const Header = ({ title, icon }) => {
@@ -18,6 +18,10 @@ const Header = ({ title, icon }) => {
           style={[styles.back, styles.menu]}
         />
       </TouchableOpacity>
+
+      <StatusBar barStyle="light-content"
+        hidden={false}
+        backgroundColor="#00BCD4" />
     </View>
   );
 };

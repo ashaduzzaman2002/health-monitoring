@@ -15,7 +15,7 @@ const verifcationToken = new Schema({
 
     createdAt: {
         type: Date,
-        expires: 600,
+        expires: 10000,
         default: Date.now(),
     },
 })

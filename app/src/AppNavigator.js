@@ -1,26 +1,28 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/Home';
 import Welcome from './screens/Welcome';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
+import Otp from './screens/Otp';
+import { AuthContext } from './context/AppContext';
 
 const Stack = createStackNavigator();
 const AppNavigator = () => {
+
+  const {isloading, userToken} = useContext(AuthContext)
+
+  if(isloading) (
+    <Text>Loading</Text>
+  )
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      {userToken === null ? <Stack.Navigator>
         <Stack.Screen
           component={Welcome}
           name="Welcome"
-          options={{ headerShown: false }}
-        />
-
-        <Stack.Screen
-          component={Home}
-          name="Home"
           options={{ headerShown: false }}
         />
 
@@ -35,7 +37,22 @@ const AppNavigator = () => {
           name="Signup"
           options={{ headerShown: false }}
         />
-      </Stack.Navigator>
+
+        <Stack.Screen
+          component={Otp}
+          name="Otp"
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator> : <Stack.Navigator>
+
+        <Stack.Screen
+          component={Home}
+          name="Home"
+          options={{ headerShown: false }}
+        />
+
+      </Stack.Navigator>}
+      
     </NavigationContainer>
   );
 };

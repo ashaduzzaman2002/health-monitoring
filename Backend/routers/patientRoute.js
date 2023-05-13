@@ -1,11 +1,20 @@
-const { check } = require('express-validator')
-const { signupPaitent, signinPatient } = require('../controllers/patientControlers')
-const { validateUser, validate } = require('../middlewares/validator')
+const router = require("express").Router();
+const { validateUser, validate, loginValidator } = require("../middlewares/validator");
 
-const router = require('express').Router()
+// Require Controllers
+const { isResetTokenValid } = require("../middlewares/user");
+const { createPatient, loginPatient, verifyEmail, forgotPassword, resetPassword } = require("../controllers/patientControlers");
 
 
-router.post('/signup', validateUser, validate, signupPaitent)
-router.post('/signin', validateUser, validate, signinPatient)
+// Routes
+router.post("/create", validateUser, validate, createPatient);
+router.post("/signin", loginValidator, validate, loginPatient);
+router.post("/verify-email", verifyEmail);
+router.post("/forgot-password", forgotPassword);
+router.post('/reset-password', isResetTokenValid, resetPassword)
+router.get('/verify-token', isResetTokenValid, (req, res) => {
+    res.json({success: true})
+})
+
 
 module.exports = router

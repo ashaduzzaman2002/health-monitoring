@@ -4,18 +4,30 @@ const Schema = mongoose.Schema;
 const patientSchema = new Schema({
   name: {
     type: String,
-    // required: true,
+    required: true,
   },
 
   email: {
     type: String,
     required: true,
-    uniquie: true,
+    unique: true,
   },
 
   password: {
     type: String,
     required: true,
+  },
+
+  avtar: {
+    type: String,
+    default:
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+  },
+
+  verified: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 
   age: {
@@ -42,6 +54,7 @@ const patientSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+
 
   //   healthLogs: [
   //     {
