@@ -28,9 +28,7 @@ exports.isResetTokenValid = async (req, res, next) => {
   next()
 };
 // valid auth token 
-exports.validUser = 
-
-async (req, res, next) => {
+exports.validUser = async (req, res, next) => {
   const {token} = req.body
   if(!token) return res.status(404).json({msg: 'Token not found'})
   

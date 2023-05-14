@@ -9,16 +9,19 @@ import {
   Animated,
   ImageBackground,
 } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { hr80 } from '../global/styles';
 import { useNavigationState } from '@react-navigation/native';
+import { AuthContext } from '../context/AppContext';
 const { height, width } = Dimensions.get('window');
 
 const Header = ({ title, icon, userDetails, navigation }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const linkList = [
+    {title: 'Home', name: 'Home'},
+    {title: 'My Watch', name: 'MyWatch'},
     { title: 'Profile', name: 'Profile' },
-    { title: 'Edit Details', name: 'EditDetails' },
+    { title: 'Edit Profile', name: 'EditProfile' },
     { title: 'Health Logs', name: 'HealthLog' },
     { title: 'Apointment', name: 'Apointment' },
   ];
@@ -31,6 +34,8 @@ const Header = ({ title, icon, userDetails, navigation }) => {
       navigation.goBack()
     }
   }
+
+  const {logout} = useContext(AuthContext)
 
   return (
     <View style={styles.header}>
@@ -86,14 +91,15 @@ const Header = ({ title, icon, userDetails, navigation }) => {
             <TouchableOpacity
               style={[
                 styles.link,
-                item.name === 'Profile' ? styles.active : null,
+                item.name === currentScreen ? styles.active : null,
               ]}
               key={i}
+              onPress={() => navigation.navigate(item.name)}
             >
               <Text
                 style={[
                   styles.linkTxt,
-                  item.name === 'Profile' ? styles.activeLinkTxt : null,
+                  item.name === currentScreen ? styles.activeLinkTxt : null,
                 ]}
               >
                 {item.title}
@@ -102,13 +108,13 @@ const Header = ({ title, icon, userDetails, navigation }) => {
           ))}
 
           <View style={hr80} />
-          <TouchableOpacity style={[styles.link, { marginTop: -10 }]}>
+          <TouchableOpacity onPress={logout} style={[styles.link, { marginTop: -10 }]}>
             <Text style={styles.linkTxt}>Logout</Text>
           </TouchableOpacity>
         </View>
       </View>
-      {/* <View style={[styles.test, !toggleMenu ? { display: 'none' } : null]}>
-        </View> */}
+      <View style={[styles.test, !toggleMenu ? { display: 'none' } : null]}>
+        </View>
 
       <StatusBar
         barStyle="light-content"

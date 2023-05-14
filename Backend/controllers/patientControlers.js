@@ -211,5 +211,5 @@ exports.getUser = async (req, res) => {
 
   if(!user) return res.status(404).json({msg: 'User not found'})
 
-  res.json({success: true, user: {email: user.email, name: user.name, avtar: user.avtar, age: user.age}})
+  res.json({success: true, user: {email: user.email, name: user.name, avtar: user.avtar, age: user.age, userId: user._id}})
 }

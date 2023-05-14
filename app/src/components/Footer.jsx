@@ -39,12 +39,23 @@ const Footer = ({navigation}) => {
         
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('MyWatch')} style={styles.iconout}>
-        <Image source={require('../images/cardiogram.png')} />
+      <TouchableOpacity onPress={() => navigation.navigate('HealthLog')} style={styles.iconout}>
+        
+        {currentScreen === 'HealthLog' ? (
+          <Image source={require('../images/cardiogramActive.png')} />
+        ) : (
+          <Image source={require('../images/cardiogram.png')} />
+        )}
+        
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.iconout}>
-        <Image source={require('../images/hospital.png')} />
+      <TouchableOpacity onPress={() => navigation.navigate('Apointment')} style={styles.iconout}>
+      {currentScreen === 'Apointment' ? (
+           <Image source={require('../images/hospitalActive.png')} />
+        ) : (
+          <Image source={require('../images/hospital.png')} />
+        )}
+       
       </TouchableOpacity>
     </View>
   );

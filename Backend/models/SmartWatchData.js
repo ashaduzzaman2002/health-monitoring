@@ -4,24 +4,20 @@ const Schema = mongoose.Schema;
 const smartWatchData = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Patient',
   },
 
   heartRate: {
     type: String,
   },
 
-  BP: {
-    type: String,
-  },
-
-  SPO2: {
+  bloodPresure: {
     type: String,
   },
 
   time: {
-    type: Data,
-    default: new Date.now()
+    type: Date,
+    default: Date.now({timeZone: "Asia/Kolkata"}),
   }
 });
 

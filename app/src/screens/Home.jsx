@@ -6,218 +6,199 @@ import {
   FlatList,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import React, { useContext } from 'react';
 import Header from '../components/Header';
 import { LinearGradient } from 'expo-linear-gradient';
 import CommonBtn from '../components/CommonBtn';
 import { AuthContext } from '../context/AppContext';
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner';
 import Footer from '../components/Footer';
+import { colors } from '../global/styles';
+
+const { width, height } = Dimensions.get('window');
 
 const Home = ({ navigation }) => {
-  const {logout, isLoading, userDetails} = useContext(AuthContext)
-  if(isLoading) {
-    return <Spinner />
+  const { logout, isLoading, userDetails } = useContext(AuthContext);
+  if (isLoading) {
+    return <Spinner />;
   }
-  
+
   return (
-    <View style={styles.container}>
-      <Header userDetails={userDetails} title={'MediDoc'} icon={require('../images/logo.png')} />
-      <Text>{userDetails?.name}</Text>
-      <ScrollView>
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
+    <>
+      <Header
+        userDetails={userDetails}
+        title={'MediDoc'}
+        icon={require('../images/logo.png')}
+      />
 
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={{ width: '100%', height: height / 3.2 }}>
+            <Image
+              style={{ width: '100%', height: '100%' }}
+              resizeMode="contain"
+              source={require('../images/banner.png')}
+            />
+          </View>
 
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
+          {/* Slider  */}
+          <View style={styles.slider1out}>
+            <Text style={{ fontSize: 20, fontWeight: '500' }}>
+              Popular Doctors
+            </Text>
+            <Text style={styles.bannerTxt}>Top rated doctor near you.</Text>
+            <View style={styles.slider1Cardout}>
+              <ScrollView
+                showsHorizontalScrollIndicator={false}
+                horizontal={true}
+                style={styles.slider1Cardinner}
+              >
+                <Slider1Item
+                  imgUrl="https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg?w=2000"
+                  doctor={`Dr. Zaman`}
+                  degree="MBBS, MD"
+                  college="AIIMS"
+                />
+                <Slider1Item
+                  imgUrl="https://static.vecteezy.com/system/resources/previews/015/715/522/original/female-doctor-avatar-clipart-icon-in-flat-design-vector.jpg"
+                  doctor={'Dr. Jabed'}
+                  degree="MBBS"
+                  college="Col"
+                />
+              </ScrollView>
 
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
+              
+            </View>
+          </View>
+        </ScrollView>
 
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={logout}>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000</Text>
-        <Text>Logout0000000000000000kkkk</Text>
-      </TouchableOpacity>
-      </ScrollView>
-      
-      <Footer navigation={navigation} />
-    </View>
+        <Footer navigation={navigation} />
+      </View>
+    </>
   );
 };
+
+// Slider 1
+const Slider1Item = ({ imgUrl, doctor, degree, college }) => (
+  <View style={styles.slider1CardItem}>
+    <Image
+      resizeMode="cover"
+      style={styles.slider1Img}
+      source={{ uri: imgUrl }}
+    />
+
+    <View>
+      <Text style={styles.slider1CardHeading}>{doctor}</Text>
+      <View style={styles.ratingContainer}>
+        <Image
+          style={{ marginRight: 5, width: 26, height: 23 }}
+          source={require('../images/star.png')}
+        />
+        <Text
+          style={{
+            color: '#000000',
+            fontWeight: '900',
+            fontSize: 14,
+          }}
+        >
+          4.5(500+)
+        </Text>
+      </View>
+
+      <Text style={styles.slider1Txt}>{degree}</Text>
+      <Text style={styles.slider1Txt}>{college}</Text>
+      <TouchableOpacity style={[styles.btn, { marginTop: 5 }]}>
+        <Text style={styles.btnTxt}>Vsit</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+);
 
 export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    zIndex: 1
+    zIndex: 1,
+    paddingHorizontal: 20,
   },
-  banner: {
-    width: '100%',
-    height: 200,
-    borderRadius: 10,
-    alignSelf: 'center',
-    marginTop: 10,
-  },
-  heading: {
-    color: '#000',
-    fontSize: 18,
-    fontWeight: '700',
-    marginTop: 15,
-    marginLeft: 15,
-  },
-  linearGradient: {
-    width: 120,
-    height: 80,
-    borderRadius: 10,
-    marginLeft: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  catName: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  docItem: {
-    width: '45%',
 
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    borderWidth: 0.2,
-    margin: 10,
-  },
-  docImg: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    alignSelf: 'center',
-    marginTop: 20,
-  },
-  docName: {
-    fontSize: 18,
-    fontWeight: '700',
-    alignSelf: 'center',
-    marginTop: 10,
-  },
-  docSpl: {
+
+  bannerTxt: {
     fontSize: 14,
-    marginTop: 5,
-    fontWeight: '600',
-    alignSelf: 'center',
-    color: 'green',
-    backgroundColor: '#f2f2f2',
-    padding: 5,
-    borderRadius: 10,
+    color: 'gray',
   },
-  status: {
-    fontSize: 14,
-    marginTop: 5,
-    fontWeight: '600',
-    alignSelf: 'center',
-  },
-  bottomView: {
-    width: '90%',
-    height: 60,
+
+  bannerImg: {
+    width: '100%',
+    height: 160,
     borderRadius: 10,
-    elevation: 5,
-    position: 'absolute',
-    bottom: 20,
-    backgroundColor: '#fff',
-    alignSelf: 'center',
+    marginTop: 15,
+  },
+
+  slider1out: {
+    width: '100%',
+    marginTop: 40,
+  },
+
+  slider1Cardout: {
+    width: '100%',
+    marginTop: 12,
+  },
+
+  slider1Cardinner: {
+    width: width - 40,
+    height: 156,
+  },
+
+  slider1CardItem: {
+    width: width - 40,
+    height: '100%',
+    borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    paddingRight: 10,
   },
-  bottomIcon: {
-    width: 30,
-    height: 30,
+
+  slider1Img: {
+    height: '100%',
+    width: 125,
+    borderRadius: 20,
+  },
+
+  btn: {
+    width: 170,
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+    alignItems: 'center',
+    paddingVertical: 5,
+  },
+
+  btnTxt: {
+    color: '#ffffff',
+
+    fontWeight: '800',
+    fontSize: 20,
+  },
+
+  slider1CardHeading: {
+    fontWeight: '800',
+    fontSize: 20,
+    color: '#000000',
+  },
+
+  ratingContainer: {
+    flexDirection: 'row',
+    marginTop: 4,
+  },
+
+  slider1Txt: {
+    fontWeight: '400',
+    fontSize: 12,
+    color: 'gray',
+    marginTop: 5,
   },
 });
