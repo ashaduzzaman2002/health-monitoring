@@ -8,6 +8,10 @@ const port = 8000 || process.env.PORT
 // Import Routes
 const patientRouter = require('./routers/patientRoute')
 const wacthRoter = require('./routers/watchRoute')
+const adminRouter = require('./routers/adminRoute')
+const doctorRouter = require('./routers/doctorRoute')
+const apointmentRouter = require('./routers/apointmentRoute')
+const alertRouter = require('./routers/alertRoute')
 
 
 // Midleware
@@ -22,6 +26,10 @@ app.get('/', (req, res) => {
 app.use('/api/patient', patientRouter)
 
 app.use('/api/smart-watch', wacthRoter)
+app.use('/api/admin', adminRouter)
+app.use('/api/doctor', doctorRouter)
+app.use('/api/apointment', apointmentRouter)
+app.use('/api/alert', alertRouter)
 
 // connected to the db
 dbConnection()

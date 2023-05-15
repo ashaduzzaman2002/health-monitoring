@@ -64,7 +64,6 @@ exports.createPatient = async (req, res) => {
   }
 };
 
-
 // Login user
 exports.loginPatient = async (req, res) => {
   const { email, password } = req.body;
@@ -203,13 +202,46 @@ exports.resetPassword = async (req, res) => {
   await ResetPassToken.findOneAndDelete({ owner: user._id });
 };
 
-
 // Get user
 exports.getUser = async (req, res) => {
+  const userId = req.userId;
+  let user = await Patient.findById(userId);
+
+  if (!user) return res.status(404).json({ msg: 'User not found' });
+
+  res.json({
+    success: true,
+    user: {
+      email: user.email,
+      name: user.name,
+      avtar: user.avtar,
+      age: user.age,
+      userId: user._id,
+      gender: user.gender,
+      bloodGroup: user.bloodGroup,
+      height: user.height,
+      weight: user.weight,
+    },
+  });
+};
+
+
+exports.updateDetails = async (req, res) => {
+  const {avtar, age, gender, bloodGroup, height, weight} = req.body
   const userId = req.userId
-  let user = await Patient.findById(userId)
 
-  if(!user) return res.status(404).json({msg: 'User not found'})
+  try {
+    let user = await Patient.findById(userId)
 
-  res.json({success: true, user: {email: user.email, name: user.name, avtar: user.avtar, age: user.age, userId: user._id}})
+    if(!user) return res.status(401).json({msg: 'Unauthorized access'})
+  
+    user = await Patient.findByIdAndUpdate(userId, {avtar, age, gender, bloodGroup, height, weight})
+    await user.save()
+    res.json({success: true, msg: 'Profile updated successfully'})
+  } catch (error) {
+    console.log(error);
+  }
+ 
+
+  console.log(avtar, userId, age, gender, bloodGroup, height, weight);
 }

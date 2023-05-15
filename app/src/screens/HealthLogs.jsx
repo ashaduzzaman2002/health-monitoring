@@ -41,8 +41,6 @@ const HealthLogs = ({ navigation }) => {
       });
 
       setTodaysData(last24Hours);
-
-      console.log(last24Hours);
       if (last24Hours?.length) {
         const maxHeartRate = last24Hours.reduce((max, obj) => {
           const heartRate = parseInt(obj.heartRate);

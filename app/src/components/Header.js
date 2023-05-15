@@ -94,7 +94,10 @@ const Header = ({ title, icon, userDetails, navigation }) => {
                 item.name === currentScreen ? styles.active : null,
               ]}
               key={i}
-              onPress={() => navigation.navigate(item.name)}
+              onPress={() => {
+                navigation.navigate(item.name)
+                setToggleMenu(false)
+              }}
             >
               <Text
                 style={[

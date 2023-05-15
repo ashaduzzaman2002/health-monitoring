@@ -3,7 +3,7 @@ const { validateUser, validate, loginValidator } = require("../middlewares/valid
 
 // Require Controllers
 const { isResetTokenValid, validUser } = require("../middlewares/user");
-const { createPatient, loginPatient, verifyEmail, forgotPassword, resetPassword, getUser } = require("../controllers/patientControlers");
+const { createPatient, loginPatient, verifyEmail, forgotPassword, resetPassword, getUser, updateDetails } = require("../controllers/patientControlers");
 
 
 // Routes
@@ -17,5 +17,6 @@ router.get('/verify-token', isResetTokenValid, (req, res) => {
 })
 
 router.post('/get-user', validUser, getUser)
+router.post('/update-details', validUser, updateDetails)
 
 module.exports = router

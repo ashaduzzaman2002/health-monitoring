@@ -20,7 +20,8 @@ import { colors } from '../global/styles';
 const { width, height } = Dimensions.get('window');
 
 const Home = ({ navigation }) => {
-  const { logout, isLoading, userDetails } = useContext(AuthContext);
+  const { logout, isLoading, userDetails, allDoctors } =
+    useContext(AuthContext);
   if (isLoading) {
     return <Spinner />;
   }
@@ -31,6 +32,7 @@ const Home = ({ navigation }) => {
         userDetails={userDetails}
         title={'MediDoc'}
         icon={require('../images/logo.png')}
+        navigation={navigation}
       />
 
       <View style={styles.container}>
@@ -55,21 +57,18 @@ const Home = ({ navigation }) => {
                 horizontal={true}
                 style={styles.slider1Cardinner}
               >
-                <Slider1Item
-                  imgUrl="https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg?w=2000"
-                  doctor={`Dr. Zaman`}
-                  degree="MBBS, MD"
-                  college="AIIMS"
-                />
-                <Slider1Item
-                  imgUrl="https://static.vecteezy.com/system/resources/previews/015/715/522/original/female-doctor-avatar-clipart-icon-in-flat-design-vector.jpg"
-                  doctor={'Dr. Jabed'}
-                  degree="MBBS"
-                  college="Col"
-                />
+                {allDoctors?.map((item, i) => (
+                  <Slider1Item
+                    key={i}
+                    imgUrl={item.avtar}
+                    doctor={item.name}
+                    degree={item.degree}
+                    college={item.college}
+                    email= {item.email}
+                    navigation = {navigation}
+                  />
+                ))}
               </ScrollView>
-
-              
             </View>
           </View>
         </ScrollView>
@@ -81,7 +80,7 @@ const Home = ({ navigation }) => {
 };
 
 // Slider 1
-const Slider1Item = ({ imgUrl, doctor, degree, college }) => (
+const Slider1Item = ({ imgUrl, doctor, degree, college, email, navigation }) => (
   <View style={styles.slider1CardItem}>
     <Image
       resizeMode="cover"
@@ -109,7 +108,7 @@ const Slider1Item = ({ imgUrl, doctor, degree, college }) => (
 
       <Text style={styles.slider1Txt}>{degree}</Text>
       <Text style={styles.slider1Txt}>{college}</Text>
-      <TouchableOpacity style={[styles.btn, { marginTop: 5 }]}>
+      <TouchableOpacity onPress={() => navigation.navigate('BookApointment', {email, doctor})} style={[styles.btn, { marginTop: 5 }]}>
         <Text style={styles.btnTxt}>Vsit</Text>
       </TouchableOpacity>
     </View>
@@ -124,7 +123,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
     paddingHorizontal: 20,
   },
-
 
   bannerTxt: {
     fontSize: 14,

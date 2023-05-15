@@ -15,6 +15,7 @@ import Apointment from './screens/Apointment';
 import Demo from './screens/Demo';
 import Profile from './screens/Profile';
 import EditProfile from './screens/EditProfile';
+import BookApointment from './screens/BookApointment';
 
 const Stack = createStackNavigator();
 const AppNavigator = () => {
@@ -82,18 +83,24 @@ const AppNavigator = () => {
           />
 
           <Stack.Screen
+            component={BookApointment}
+            name="BookApointment"
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
             component={Demo}
             name="Demo"
             options={{ headerShown: false }}
           />
 
-<Stack.Screen
+          <Stack.Screen
             component={Profile}
             name="Profile"
             options={{ headerShown: false }}
           />
 
-<Stack.Screen
+          <Stack.Screen
             component={EditProfile}
             name="EditProfile"
             options={{ headerShown: false }}

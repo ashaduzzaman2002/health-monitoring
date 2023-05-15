@@ -1,4 +1,5 @@
 import {
+  Alert,
     Keyboard,
   StyleSheet,
   Text,
@@ -18,6 +19,9 @@ const Demo = ({ navigation }) => {
   const { userDetails, userToken, currentData } = useContext(AuthContext);
   const [heartRate, setHeartRate] = useState(null);
   const [bloodPresure, setBloodPresure] = useState(null);
+  const [isSend, setIsSend] = useState(true)
+  const [showAlert, setShowAlert] = useState(false)
+
   const handleSendData = async () => {
     const watchData = {
       token: userToken,
@@ -33,17 +37,45 @@ const Demo = ({ navigation }) => {
 
     try {
         const {data} = await axios.post(`${loaclURL}api/smart-watch/data/collect`, watchData)
-        if(heartRate < 60 || heartRate > 100  ){
-            console.log('Denger');
+        setShowAlert(true)
+            setIsSend(true)
+        if(heartRate < 60 || heartRate > 100 || bloodPresure > 1.5  ){
+          try {
+            const {data} = await axios.post(`${loaclURL}api/alert/send`, {token: userToken, heartRate, bloodPresure})
+          console.log(data);
+
+            // if(showAlert){
+            //   Alert.alert(
+            //     'Alert',
+            //     'Sending alert to email. Do you cant to cancel?',
+            //     [
+            //       { text: 'Cancel', onPress: () => setIsSend(true) }
+            //     ],
+            //     { cancelable: false }
+            //   );
+            // }
+
+            // setTimeout(() => {
+            //   if(isSend){
+            //     console.log('0denger');
+            //   }
+
+            //   console.log(isSend);
+
+            //   console.log('object');
+            //   // setShowAlert(false)
+            // }, 3000)
+            
+            // console.log('j',isSend);
+          } catch (error) {
+            console.log(error?.respose);
+          }
+            
         }
 
-        if(bloodPresure > 1.5 ){
-            console.log('Denger');
-        }
 
         setHeartRate('')
         setBloodPresure('')
-        console.log(data);
     } catch (error) {
         console.log('error:', error);
     }

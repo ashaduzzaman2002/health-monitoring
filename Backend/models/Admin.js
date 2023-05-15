@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const patientSchema = new Schema({
+const adminSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -30,31 +30,6 @@ const patientSchema = new Schema({
     default: false,
   },
 
-  age: {
-    type: String,
-  },
-
-  gender: {
-    type: String,
-  },
-
-  bloodGroup: {
-    type: String,
-  },
-
-  height: {
-    type: Number,
-  },
-
-  weight: {
-    type: Number,
-  },
-
-  userCreated: {
-    type: Date,
-    default: Date.now,
-  },
-
 });
 
-module.exports = mongoose.model('Patient', patientSchema);
+module.exports = mongoose.model('Admin', adminSchema);

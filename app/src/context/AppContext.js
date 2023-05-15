@@ -12,6 +12,11 @@ export const AuthProvider = ({ children }) => {
   const [isConnected, setIsConnected] = useState(null);
   const [currentHeartRate, setCurrentHeartRate] = useState(null);
   const [currentBloodPresure, setCurrentBloodPresure] = useState(null);
+  const [allDoctors, setAllDoctors] = useState([])
+  const [apointments, setApointments] = useState([])
+
+
+
 
   const login = async (token) => {
     setIsLoading(true);
@@ -38,6 +43,8 @@ export const AuthProvider = ({ children }) => {
       setUserDetails(data?.user);
       setUserToken(userToken);
       setIsLoading(false);
+      getAllDoctor(userToken)
+      getApointments(userToken)
     } catch (error) {
       console.log(error?.response?.data?.msg);
       setIsLoading(false);
@@ -64,6 +71,55 @@ export const AuthProvider = ({ children }) => {
     setCurrentBloodPresure(bloodPresure);
   };
 
+  const updateDetails = async (
+    profilePic,
+    age,
+    gender,
+    bloodGroup,
+    height,
+    weight
+  ) => {
+    try {
+      const { data } = await axios.post(
+        `${loaclURL}api/patient/update-details`,
+        {
+          token: userToken,
+          avtar: profilePic,
+          age: age,
+          gender,
+          bloodGroup,
+          height,
+          weight,
+        }
+      );
+
+      console.log('object', data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllDoctor = async (token) => {
+    try {
+      setIsLoading(true)
+      const {data} = await axios.post(`${loaclURL}api/doctor/all-doctor`, {token})
+      setAllDoctors(data.doctors);
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error?.response.data);
+    }
+  }
+
+  const getApointments = async (token) => {
+    try {
+      const {data} = await axios.post(`${loaclURL}api/apointment/view`, {token})
+      setApointments([...data.reverse()])
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  
   useEffect(() => {
     isLoggedIn();
     currentData();
@@ -83,6 +139,9 @@ export const AuthProvider = ({ children }) => {
         currentHeartRate,
         currentBloodPresure,
         currentData,
+        updateDetails,
+        allDoctors,
+        apointments,
       }}
     >
       {children}

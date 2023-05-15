@@ -1,7 +1,8 @@
 const { isValidObjectId } = require('mongoose');
 const Patient = require('../models/Patient');
 const ResetPassToken = require('../models/ResetPassToken');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const Admin = require('../models/Admin');
 
 exports.isResetTokenValid = async (req, res, next) => {
   const { token, id } = req.query;
@@ -41,4 +42,19 @@ exports.validUser = async (req, res, next) => {
     res.status(401).json({msg: 'Invalid Token'})
   }
   
+}
+
+
+exports.isAdmin = async( req, res, next) => {
+  const userId = req.userId
+
+  try {
+    let admin = await Admin.findById(userId)
+
+    if(!admin) return res.status(401).json({msg: 'Unauthorized access'})
+
+    next()
+  } catch (error) {
+    console.log(error);
+  }
 }
