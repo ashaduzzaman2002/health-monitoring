@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap');
+
+.navbar-brand {
+    font-size: 2.8rem;
+    letter-spacing: 5px;
+    font-weight: 700;
+    font-family: 'Passions Conflict', cursive;
+    color: #fff;
+    text-shadow: 1px 1px 1px #00000055;
+    padding: 0;
+}
+
+.auth-form {
+    width: 30%;
+    margin: auto;
+    padding-top: 10%;
+}

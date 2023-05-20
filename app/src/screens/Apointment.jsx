@@ -17,6 +17,7 @@ import { colors, hr80 } from '../global/styles';
 import { loaclURL } from '../../connection/config';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
+import { useRoute } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,34 +25,35 @@ const Apointment = ({ navigation }) => {
   const { allDoctors, isLoading, userDetails, apointments, userToken } =
     useContext(AuthContext);
 
-    const [apointList, setApointList] = useState(apointments)
-    const showToast = (type, text1, text2) => {
-      Toast.show({
-        type,
-        text1,
-        text2,
-        autoHide: true,
+  const [apointList, setApointList] = useState(apointments);
+  const showToast = (type, text1, text2) => {
+    Toast.show({
+      type,
+      text1,
+      text2,
+      autoHide: true,
+    });
+  };
+
+  const cancel = async (id) => {
+    console.log(id);
+    try {
+      const { data } = await axios.post(`${loaclURL}api/apointment/delete`, {
+        id,
+        token: userToken,
       });
-    };
 
-    const cancel = async (id) => {
-      console.log(id);
-      try {
-        const {data} = await axios.post(`${loaclURL}api/apointment/delete`, {id, token: userToken})
-
-        setApointList(apointList.filter(item => item._id !== id));
-        showToast('success', data.msg)
-      } catch (error) {
-        console.log(error);
-      }
-      
+      setApointList(apointList.filter((item) => item._id !== id));
+      showToast('success', data.msg);
+    } catch (error) {
+      console.log(error);
     }
-
-  
+  };
 
   if (isLoading) {
     return <Spinner />;
   }
+
 
   return (
     <>
@@ -64,10 +66,7 @@ const Apointment = ({ navigation }) => {
 
       <SafeAreaView style={styles.container}>
         <ScrollView style={{ paddingHorizontal: 20 }}>
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-          >
+          <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
             {apointList?.map((item, i) => (
               <View key={i} style={styles.apointmentCard}>
                 <Text style={{ fontSize: 25, fontWeight: '500' }}>
@@ -77,8 +76,11 @@ const Apointment = ({ navigation }) => {
                   Doctor: {item.doctorName}
                 </Text>
                 <Text style={{ color: 'gray', fontSize: 14 }}>{item.time}</Text>
-                <TouchableOpacity onPress={() => cancel(item._id)} style={{position: 'absolute', bottom: 10, right: 15}}>
-                  <Text style={{color: 'red'}}>Cancel</Text>
+                <TouchableOpacity
+                  onPress={() => cancel(item._id)}
+                  style={{ position: 'absolute', bottom: 10, right: 15 }}
+                >
+                  <Text style={{ color: 'red' }}>Cancel</Text>
                 </TouchableOpacity>
               </View>
             ))}

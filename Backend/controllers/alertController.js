@@ -15,3 +15,20 @@ exports.sendAlert = (req, res) => {
 
     res.json({bloodPresure, heartRate})
 } 
+
+
+exports.sendReminder = (req, res) => {
+  const {time, email} = req.body
+
+  mailTransport().sendMail({
+      from: 'crezytechy@gmail.com',
+      to: email,
+      subject: 'Reminder',
+      html: `<p>Dear,</p>
+      <p>You have an apointment at ${time}</p>
+      <p>User maybe not well</p>
+      `,
+    });
+
+  res.json({success: true})
+} 

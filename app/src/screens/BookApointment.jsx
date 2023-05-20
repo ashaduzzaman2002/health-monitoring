@@ -22,7 +22,7 @@ const {height} = Dimensions.get('window')
 
 const BookApointment = ({ navigation }) => {
   const {email, doctor} = useRoute().params
-  const { userDetails, userToken, apointments } = useContext(AuthContext);
+  const { userDetails, userToken} = useContext(AuthContext);
   const [time, setTime] = useState('');
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
@@ -114,11 +114,14 @@ const BookApointment = ({ navigation }) => {
       const {data} = await axios.post(`${loaclURL}api/apointment/book`, newApointment)
       
       showToast('success', data.msg)
-      apointments.push(data.apointment)
+
+      setTime('')
+      setDay('')
+      setMonth('')
       
       setTimeout(() => {
         navigation.navigate('Apointment')
-      }, 3000)
+      }, 1000)
     } catch (error) {
       if(error?.respose?.data) return showToast('error', error?.respose?.data.msg)
       console.log(error);

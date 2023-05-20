@@ -33,18 +33,20 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const {login} = useContext(AuthContext)
+  const { login } = useContext(AuthContext);
 
   useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      // Navigate to the home page
-      navigation.navigate('Welcome');
-      return true; // Prevent default back behavior
-    });
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        // Navigate to the home page
+        navigation.navigate('Welcome');
+        return true; // Prevent default back behavior
+      }
+    );
 
     return () => backHandler.remove();
-  }, [navigation])
-  
+  }, [navigation]);
 
   // Show toast message
   const showToast = (type, text1, text2) => {
@@ -79,17 +81,16 @@ const Login = ({ navigation }) => {
     // login(email, password)
 
     try {
-      const {data} = await axios.post(`${loaclURL}api/patient/signin`, user)
-      console.log(data.patient.token);
-       setEmail('');
-    setPassword('');
-    
+      const { data } = await axios.post(`${loaclURL}api/patient/signin`, user);
+      setEmail('');
+      setPassword('');
+
       showToast('success', 'Logged-in successfully', 'Welcome back to MediDoc');
 
       setTimeout(() => {
-        login(data.patient.token)
-        navigation.navigate('Home')
-      }, 3000)
+        login(data.patient.token);
+        navigation.navigate('Home');
+      }, 3000);
     } catch (error) {
       if (error?.response?.data) {
         const { data } = error.response;
@@ -99,10 +100,8 @@ const Login = ({ navigation }) => {
       }
       console.log(error);
     }
-   
-   
+
     Keyboard.dismiss();
-    
   };
 
   return (
@@ -173,7 +172,12 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
 
       {/* Forgot password */}
-      <Text onPress={() => navigation.navigate('ForgotPass')} style={styles.forgot}>Forgot Password</Text>
+      <Text
+        onPress={() => navigation.navigate('ForgotPass')}
+        style={styles.forgot}
+      >
+        Forgot Password
+      </Text>
 
       <View style={hr80} />
 
