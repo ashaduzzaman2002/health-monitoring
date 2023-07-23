@@ -42,3 +42,24 @@ exports.getAllDoctor = async (req, res) => {
         console.log(error);
     }
 }
+
+
+// Get user
+exports.getDoctor = async (req, res) => {
+  const userId = req.userId;
+  let user = await Doctor.findById(userId);
+
+  if (!user) return res.status(404).json({ msg: 'User not found' });
+
+  res.json({
+    success: true,
+    user: {
+      email: user.email,
+      name: user.name,
+      avtar: user.avtar,
+      dgree: user.dgree,
+      id: user._id,
+      college: user.college,
+    },
+  });
+};

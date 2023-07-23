@@ -1,0 +1,1 @@
+export const loaclURL = 'http://192.168.231.6:8000/'

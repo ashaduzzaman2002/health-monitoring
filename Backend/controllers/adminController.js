@@ -61,10 +61,11 @@ exports.addDoctor = async (req, res) => {
     let doctor = await Doctor.findOne({ email });
 
     if (doctor) return res.status(401).json({ msg: 'Already resgister' });
+    const hashpassword = await bcrypt.hash(password, 8)
     doctor = new Doctor({
       name,
       email,
-      password,
+      password: hashpassword,
       degree,
       college,
     });

@@ -7,7 +7,6 @@ const Apointments = () => {
   const { allApointments, userToken } = useContext(AppContext);
 
   const sendReminder = async (email, time) => {
-    console.log(email, time);
 
     try {
       const { data } = await axios.post(
